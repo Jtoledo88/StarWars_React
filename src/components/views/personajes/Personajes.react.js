@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-
+import Especie from './Especie.react.js'
+import Film from './Film.js'
 
 class Personajes extends Component {
     constructor(props) {
         super(props);
         this.state = {
             personajes: [],
+            film: {},
+            especie: {},
             url: 'https://swapi.co/api/people/',
             next: '',
             prev: '',
@@ -31,30 +34,15 @@ class Personajes extends Component {
         })
     };
 
-    async getEspecie(url) {
-        try {
-            const resp = await axios.get(url);
-            const data = await resp.data;
-            return data;
-        }catch (e) {
-            console.log(e);
-        }
-    }
-
-
     render() {
         const personajes = this.state.personajes.map((personaje, i) => {
-            const especie = personaje.species.map((sp, i) => {
-                //console.log(sp);
-                const {resp} = this.getEspecie(sp);
-
-                console.log(resp);
-
-                return <strong key={i}>{sp}</strong>;
-            });
-
-            //console.log(especie);
-
+            const specie = personaje.species.map((sp, i) => {
+                console.log(sp);
+                return <Especie key={"sp"+i} url={sp}/>;
+            })
+            const films = personaje.films.map((f, i) => {
+                return <Film key={"f"+i} url={f} />;
+            })
             return <article key={i} className="col-sm-6" id="film-id-'+[+people+1]+'">
                 <div className="card">
                     <img className="card-img-top"
@@ -62,8 +50,11 @@ class Personajes extends Component {
                          alt={personaje.name}/>
                     <div className="card-body">
                         <h4>{personaje.name}</h4>
-                        <h5>Especie: {especie}</h5>
-
+                        <h5>Especie: {specie} </h5>
+                        <h5>Peliculas: </h5>
+                             <ul>
+                            {films}
+                        </ul>
                     </div>
                 </div>
             </article>

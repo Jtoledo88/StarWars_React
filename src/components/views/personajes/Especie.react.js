@@ -1,30 +1,46 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class Especies extends Component {
+export default class Especie extends Component {
     constructor(props){
         super(props)
-
         this.state = {
-            especies: {},
-            url: this.props.url,
+            loading: true,
+            especie: {},
         }
-
-        this.getDetailEspecie(this.state.url);
+    }
+    
+    componentDidMount(){
+          this.getEspecie(this.props.url);
     }
 
-    getDetailEspecie = (url) => {
+ /*   getEspecie(url){
+        this.setState({ loading: true })
+            fetch(url)
+                .then(resp => resp.json())
+                .then(data => this.setState({especie: data, loading: false }));
+    }
+*/
+    getEspecie = (url) => {
         axios.get(url)
             .then((response) => {
-                //console.log(response);
-                this.setState({ especie: response.data });
+                //console.log(response)
+                this.setState({
+                    especie: response.data,
+                    loading: false,
+                });
             }).catch((error) => {
-                console.log(error)
-            })
-    }
+            console.log(error)
+        })
+    };
+    
+    
     render(){
-        return <p key={ this.state.especie.id }>{ this.state.especie.name }</p>;
+         if(this.state.loading) {
+            return "cargando...";
+        }else{
+            return this.state.especie.name;
+        }
+      
     }
 }
-
-export default Especies;

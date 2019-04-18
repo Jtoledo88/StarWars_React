@@ -13,18 +13,18 @@ class Starchips extends Component {
         componentWillMount(){
             axios.get('https://swapi.co/api/starships/')
               .then((response) => {
-                console.log(response)
+                //console.log(response)
                 this.setState({starchips: response.data.results})
               }).catch((error) => {
                 console.log(error)
               });
         }
         render(){
-            var starchips = this.state.starchips.map(function(starchip){
-                return  <div id="starship-id-'+[i]+'" className="col-sm-6">
+            var starchips = this.state.starchips.map(function(starchip, i){
+                return  <div key={i} id="starship-id-'+[i]+'" className="col-sm-6">
                              <table className="table">
                                 <thead>
-                                    <th colspan="2">
+                                    <th colSpan="2">
                                         <h4>{starchip.name}</h4>
                                    </th>
                                </thead>
@@ -59,9 +59,9 @@ class Starchips extends Component {
                 {starchips}
             </div>
         </div>
-        <footer class="text-center footer-page footer-page-starships">
-            <a href="" id="prev-starships" class="btn btn-primary">Anterior</a>
-            <a href="" id="next-starships" class="btn btn-primary">Siguiente</a>
+        <footer className="text-center footer-page footer-page-starships">
+            <a href="" id="prev-starships" className="btn btn-primary">Anterior</a>
+            <a href="" id="next-starships" className="btn btn-primary">Siguiente</a>
         </footer>
     </article>
  

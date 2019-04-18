@@ -11,20 +11,20 @@ class Planetas extends Component {
         componentWillMount(){
             axios.get('https://swapi.co/api/planets/')
               .then((response) => {
-                console.log(response)
+                
                 this.setState({planetas: response.data.results})
               }).catch((error) => {
                 console.log(error)
               });
         }
         render(){
-            var planetas = this.state.planetas.map(function(planeta){
-                return  <div id="planet-id-'+[i]+'" className="col-sm-6">
+            var planetas = this.state.planetas.map(function(planeta, i){
+                return  <div key={i} className="col-sm-6">
                 <table className="table">
                     <thead>
-                    <th colspan="2">
-                        <h4>{planeta.name}</h4>
-                    </th>
+                        <th colSpan="2">
+                            <h4>{planeta.name}</h4>
+                        </th>
                     </thead>
                     <tbody>
                         <tr>
@@ -52,7 +52,7 @@ class Planetas extends Component {
             </div>
             });
             return (
-                <div id="plantes">
+                 <section id="">
                 <article>
                 <header className="planets-cover header-light">
                     <h1 className="container">Planetas</h1>
@@ -67,7 +67,8 @@ class Planetas extends Component {
                     <a href="" id="next-planets" className="btn btn-primary">Siguiente</a>
                 </footer>
             </article>
-            </div>
+             </section>
+          
  
             );
         }

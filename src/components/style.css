@@ -171,9 +171,9 @@ header{
     background: #b8441b;
 }
 #home,#films,#people,#planets,#vehicles,#starships{
-    display:none;
+
 }
-.film-cover,.people-cover,.planets-cover,.vehicles-cover,.starships-cover{
+.film-cover, .people-cover, .planets-cover, .vehicles-cover, .starships-cover{
     padding:6rem 0;
     background:transparent center center fixed;
     background-size: cover;
@@ -184,7 +184,7 @@ header{
     -o-transition: all 0.5s;
     transition: all 0.5s;
 }
-#films article,#people article, #planets article,#vehicles article,#starships article{
+ article{
     background: #fff;
     color:#000;
     -webkit-transition: all 0.5s;
@@ -277,6 +277,9 @@ header{
 }
 #planets .btn-primary{
     color:#2bc4ee;
+}
+.table-planets {
+    background-color: white;
 }
 /* #vehicles */
 .vehicles-cover{

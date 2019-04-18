@@ -12,18 +12,18 @@ class Vehiculos extends Component {
         componentWillMount(){
             axios.get('https://swapi.co/api/vehicles/')
               .then((response) => {
-                console.log(response)
+                //console.log(response)
                 this.setState({vehiculos: response.data.results})
               }).catch((error) => {
                 console.log(error)
               });
         }
         render(){
-            var vehiculos = this.state.vehiculos.map(function(vehiculo){
-                return  <div id={"vehicle-id-" + vehiculo.length} className="col-sm-6">
+            var vehiculos = this.state.vehiculos.map(function(vehiculo, i){
+                return  <div key={i} id={"vehicle-id-" + vehiculo.length} className="col-sm-6">
                 <table className="table">
                     <thead>
-                    <th colspan="2">
+                    <th colSpan="2">
                         <h4>{vehiculo.name}</h4>
                     </th>
                     </thead>
